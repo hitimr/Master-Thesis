@@ -15,7 +15,7 @@ endmacro()
 macro(setup_subproject_path_vars _NAME)
   set(SUBPROJECT_NAME ${_NAME})
 
-  set(SUBPROJECT_INSTALL_PATH ${INSTALL_DIR_ABSOLUTE})
+  set(SUBPROJECT_INSTALL_PATH ${INSTALL_DIR_ABSOLUTE}/install)
 
   set(SUBPROJECT_SOURCE_PATH ${SUBPROJECT_NAME}/source)
   set(SUBPROJECT_STAMP_PATH ${SUBPROJECT_NAME}/stamp)
@@ -43,7 +43,7 @@ macro(build_subproject)
     URL ${BUILD_SUBPROJECT_URL}
     LIST_SEPARATOR | # Use the alternate list separator
     CMAKE_ARGS
-      -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
       -DCMAKE_INSTALL_PREFIX:PATH=${SUBPROJECT_INSTALL_PATH}
@@ -53,7 +53,7 @@ macro(build_subproject)
       -DCMAKE_INSTALL_BINDIR=${CMAKE_INSTALL_BINDIR}
       -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
       ${BUILD_SUBPROJECT_BUILD_ARGS}
-    BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
+    BUILD_COMMAND ${DEFAULT_BUILD_COMMAND_PARALLEL}
     BUILD_ALWAYS OFF
   )
 
@@ -65,4 +65,5 @@ macro(build_subproject)
 
   # Place installed component on CMAKE_PREFIX_PATH for downstream consumption
   append_cmake_prefix_path(${SUBPROJECT_INSTALL_PATH})
+  append_cmake_prefix_path(${SUBPROJECT_BUILD_PATH})
 endmacro()
