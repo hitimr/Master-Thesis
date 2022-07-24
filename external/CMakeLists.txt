@@ -1,3 +1,6 @@
+add_subdirectory(plog)
+
+
 build_subproject(
   NAME blosc
   URL "https://github.com/Blosc/c-blosc/archive/refs/tags/v1.21.1.zip"
@@ -14,4 +17,13 @@ build_subproject(
   # BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j1
 )
 
+build_subproject(
+  NAME openvdb
+  URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"
+  CMAKE_RULE_MESSAGES
+    -D USE_BLOSC=ON
+    -D USE_ZLIB=ON
+    -D DOPENVDB_BUILD_NANOVDB=ON
+  BUILD_SUBPROJECT_DEPENDS_ON zlib blosc tbb
+)
 

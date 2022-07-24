@@ -13,24 +13,18 @@ endif()
 
 project(raytracing)
 
+# CMake 
 include(ExternalProject)
 include(GNUInstallDirs)
 include(ProcessorCount)
 
 include(tools/macros.cmake)
 
-# Options ##
+# Options
 ProcessorCount(PROCESSOR_COUNT)
 set(NUM_BUILD_JOBS ${PROCESSOR_COUNT} CACHE STRING "Number of build jobs '-j <n>'")
-set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_BUILD_JOBS})
-
-option(DOWNLOAD_TBB "Download TBB, otherwise rely on system" ON)
-
-## Build OSPRay dependencies ##
-
-# get_filename_component(INSTALL_DIR_ABSOLUTE
-#   ${CMAKE_BINARY_DIR}/local_deps ABSOLUTE BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
-
+# set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_BUILD_JOBS})
+set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j2)
 
 
 add_subdirectory(src)
