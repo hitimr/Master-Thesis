@@ -20,12 +20,15 @@ include(ProcessorCount)
 
 include(tools/macros.cmake)
 
+
+
 # Options
 ProcessorCount(PROCESSOR_COUNT)
 set(NUM_BUILD_JOBS ${PROCESSOR_COUNT} CACHE STRING "Number of build jobs '-j <n>'")
-# set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_BUILD_JOBS})
-set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j2)
+set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_BUILD_JOBS})
+# set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j2)
 
-
-add_subdirectory(src)
+set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
 add_subdirectory(external)
+print(CMAKE_PREFIX_PATH)
+add_subdirectory(src)
