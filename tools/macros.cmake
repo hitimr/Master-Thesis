@@ -28,6 +28,10 @@ macro(build_subproject)
   # Setup SUBPROJECT_* variables (containing paths) for this function
   set(SUBPROJECT_NAME ${BUILD_SUBPROJECT_NAME})
 
+  print(SUBPROJECT_NAME)
+  print(CMAKE_ARGS)
+  message("")
+
   # Build the actual subproject
   ExternalProject_Add(${SUBPROJECT_NAME}
     PREFIX ${SUBPROJECT_NAME}
@@ -36,7 +40,6 @@ macro(build_subproject)
     SOURCE_DIR ${SUBPROJECT_NAME}/src
     BINARY_DIR ${SUBPROJECT_NAME}/bin
     URL ${BUILD_SUBPROJECT_URL}
-    # LIST_SEPARATOR | # Use the alternate list separator
     CMAKE_ARGS
       -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
