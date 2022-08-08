@@ -15,28 +15,50 @@ build_subproject(
   URL "https://github.com/oneapi-src/oneTBB/archive/refs/tags/v2021.5.0.zip"
 )
 
+# ExternalProject_Add(openvdb
+#   PREFIX openvdb
+#   DOWNLOAD_DIR openvdb/download
+#   STAMP_DIR openvdb/stamp
+#   SOURCE_DIR openvdb/src
+#   BINARY_DIR openvdb/bin
+#   INSTALL_DIR openvdb/install
+#   URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"
+#   CMAKE_ARGS
+#     -D CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+#     -D CMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+#     -D CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+#     -D CMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/openvdb
+#     -D CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
+#     -D TBB_ROOT=${CMAKE_BINARY_DIR}/external/TBB/include
+#   BUILD_ALWAYS OFF
+#   BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
+#   UPDATE_COMMAND ""
+# )
+
 ExternalProject_Add(openvdb
-  PREFIX openvdb
-  DOWNLOAD_DIR openvdb/download
-  STAMP_DIR openvdb/stamp
-  SOURCE_DIR openvdb/src
-  BINARY_DIR openvdb/bin
   URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"
+  DOWNLOAD_DIR openvdb/download
+  PREFIX openvdb
   CMAKE_ARGS
     -D CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -D CMAKE_C_COMPILER=${CMAKE_C_COMPILER}
     -D CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-    -D CMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${SUBPROJECT_NAME}
+    -D CMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/openvdb
     -D CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
-    -D TBB_ROOT=${CMAKE_BINARY_DIR}/external/TBB/include
+    -D TBB_ROOT=${CMAKE_BINARY_DIR}/external/TBB/
+    -D CMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/openvdb
   BUILD_ALWAYS OFF
   BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
 )
 
 ExternalProject_Add_StepDependencies(openvdb build TBB zlib blosc)
+# list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/openvdb/lib/cmake/OpenVDB)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR}/openvdb/lib/cmake/OpenVDB)
+print(CMAKE_MODULE_PATH)
 
 # Every subdirectoy has its own Variable scope
 # We need to propagate the current CMAKE_PREFIX_PATH upwards so it can be found the the project
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} PARENT_SCOPE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} PARENT_SCOPE)
 
 
