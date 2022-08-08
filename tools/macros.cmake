@@ -28,10 +28,6 @@ macro(build_subproject)
   # Setup SUBPROJECT_* variables (containing paths) for this function
   set(SUBPROJECT_NAME ${BUILD_SUBPROJECT_NAME})
 
-  print(SUBPROJECT_NAME)
-  print(CMAKE_ARGS)
-  message("")
-
   # Build the actual subproject
   ExternalProject_Add(${SUBPROJECT_NAME}
     PREFIX ${SUBPROJECT_NAME}
