@@ -1,2 +1,4 @@
-cuda_add_executable(nanovdb_precision nanovdb_precision.cu)
+# find_package(OpenVDB REQUIRED)
+
+add_executable(nanovdb_precision nanovdb_precision.cu)
 
