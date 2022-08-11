@@ -22,6 +22,10 @@ include(CheckLanguage)
 include(tools/macros.cmake)
 
 # Options
+option(USE_PCH "Use precompiled headers" ON)
+
+
+# Definitions
 ProcessorCount(PROCESSOR_COUNT)
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
 set(NUM_BUILD_JOBS ${PROCESSOR_COUNT} CACHE STRING "Number of build jobs '-j <n>'")

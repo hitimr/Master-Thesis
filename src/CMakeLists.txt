@@ -34,4 +34,11 @@ add_custom_target(run
     COMMAND rt
     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
 )
+if(USE_PCH)
+  target_precompile_headers(rt
+    PUBLIC 
+    util/logging.hpp
+    )
+endif()
+
 

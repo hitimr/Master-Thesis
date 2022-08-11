@@ -1,12 +1,11 @@
 #include <benchmarker/benchmarker.hpp>
 #include <openvdb/openvdb.h>
-#include <tbb/tbb.h>
 #include <util/logging.hpp>
 
 int main()
 {
   logging::init();
-  
+
   PLOG_VERBOSE << "This is a VERBOSE message";
   PLOG_DEBUG << "This is a DEBUG message";
   PLOG_INFO << "This is an INFO message";
