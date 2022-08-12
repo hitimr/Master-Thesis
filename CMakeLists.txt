@@ -24,6 +24,7 @@ include(tools/macros.cmake)
 # Options
 option(USE_PCH "Use precompiled headers" ON)
 option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
+option(BUILD_TESTS "Build unit tests" ON)
 
 
 # Definitions

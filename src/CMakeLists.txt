@@ -5,6 +5,12 @@ project(raytracing LANGUAGES C CXX CUDA)
 find_package(TBB REQUIRED)
 find_package(OpenVDB REQUIRED)
 
+if(BUILD_TESTS)
+  find_package(GTest REQUIRED)
+  enable_testing()
+  include(GoogleTest)
+endif()
+
 
 # Libraries
 rt_lib(
@@ -24,6 +30,7 @@ rt_lib(
   NAME math
   SOURCES math/math.cpp
   HEADERS math/math.hpp
+  TEST_SOURCES math/math.test.cpp
 )
 
 # Executables

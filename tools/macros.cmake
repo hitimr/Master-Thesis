@@ -63,13 +63,15 @@ endmacro()
 macro(rt_lib)
   # Parse Args
   set(oneValueArgs NAME)
-  set(multiValueArgs SOURCES HEADERS DEPENDENCIES)
+  set(multiValueArgs SOURCES HEADERS DEPENDENCIES TEST_SOURCES)
   cmake_parse_arguments(RT_LIB "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  # Set Variables
   set(NAME ${RT_LIB_NAME})
   set(LIB_NAME lib${RT_LIB_NAME})
   set(TARGET ${LIB_NAME})
 
-
+  # Library
   add_library(${TARGET} ${RT_LIB_SOURCES} ${RT_LIB_HEADERS})
   set_property(TARGET ${TARGET} PROPERTY OUTPUT_NAME ${NAME})
   add_library(rt::${NAME} ALIAS ${LIB_NAME})
@@ -77,6 +79,16 @@ macro(rt_lib)
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
 
+  # Tests
+  if(RT_LIB_TEST_SOURCES)
+    set(TEST_NAME ${NAME}_test)
+    # find_package(GTest REQUIRED)
+    add_executable(${NAME}_test ${RT_LIB_TEST_SOURCES})
+    target_link_libraries(${NAME}_test GTest::gtest_main) 
+    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+
+    # gtest_discover_tests(${NAME}_test)
+  endif()
 endmacro()  
 
 macro(rt_exe)
