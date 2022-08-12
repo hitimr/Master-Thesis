@@ -14,22 +14,23 @@ rt_lib(
 )
 
 rt_lib(
-  NAME rtmath
-  SOURCES math/rt_math.cpp
-  HEADERS math/rt_math.hpp
-)
-
-rt_lib(
   NAME logging
   HEADERS logging/logging.hpp
   SOURCES logging/logging.cpp
   DEPENDENCIES plog
 )
 
+rt_lib(
+  NAME math
+  SOURCES math/math.cpp
+  HEADERS math/math.hpp
+)
+
 # Executables
 rt_exe(
   NAME precision
   SOURCES precision.cu
-  DEPENDENCIES OpenVDB::openvdb rt::logging)
+  DEPENDENCIES OpenVDB::openvdb rt::logging rt::math
+  )
 
 add_definitions(-DNANOVDB_USE_CUDA)

@@ -7,7 +7,7 @@
 #include <plog/Init.h>
 #include <plog/Log.h>
 
-void init()
+void logging::init()
 {
   static plog::ColorConsoleAppender<plog::TxtFormatterUtcTime> consoleAppender; // TxtFormatter in UTC
   static plog::RollingFileAppender<plog::CsvFormatterUtcTime> fileAppender("UtcTime.csv", 10000,

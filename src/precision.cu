@@ -1,4 +1,5 @@
 #include "logging/logging.hpp"
+#include "math/math.hpp"
 
 #include <nanovdb/util/CudaDeviceBuffer.h>
 #include <nanovdb/util/Primitives.h>
@@ -21,11 +22,11 @@ using BufferT = nanovdb::HostBuffer;
 
 #define RAY_COUNT 1000
 #define RAY_START_Z -5.
-#define RAY_END_Z -5.
+#define RAY_END_Z 5.
 
 int main()
 {
-  // logging::init();
+  logging::init();
 
   // Generate Sphere
   nanovdb::GridHandle<BufferT> handle;
@@ -33,6 +34,8 @@ int main()
                                                                 VOXEL_SIZE, HALFWIDTH);
 
   // Generate Rays
+  math::linspace(RAY_START_Z, RAY_END_Z, RAY_COUNT);
+  math::test();
 
   return 0;
 }

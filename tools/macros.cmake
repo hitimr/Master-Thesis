@@ -70,10 +70,10 @@ macro(rt_lib)
   set(TARGET ${LIB_NAME})
 
 
-  add_library(${LIB_NAME} ${RT_LIB_SOURCES} ${RT_LIB_HEADERS})
+  add_library(${TARGET} ${RT_LIB_SOURCES} ${RT_LIB_HEADERS})
   set_property(TARGET ${TARGET} PROPERTY OUTPUT_NAME ${NAME})
   add_library(rt::${NAME} ALIAS ${LIB_NAME})
-  target_include_directories(${TARGET} 
+  target_include_directories(${LIB_NAME} 
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
 

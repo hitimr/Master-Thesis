@@ -2,6 +2,6 @@
 
 namespace logging
 {
-void init() {}
+void init();
 
 } // namespace logging

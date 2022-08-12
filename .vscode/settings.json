@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.html": "html",
+        "initializer_list": "cpp",
+        "valarray": "cpp"
+    }
+}
