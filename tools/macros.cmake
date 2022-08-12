@@ -80,14 +80,11 @@ macro(rt_lib)
   target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
 
   # Tests
-  if(RT_LIB_TEST_SOURCES)
+  if(RT_LIB_TEST_SOURCES AND BUILD_TESTS)
     set(TEST_NAME ${NAME}_test)
-    # find_package(GTest REQUIRED)
-    add_executable(${NAME}_test ${RT_LIB_TEST_SOURCES})
-    target_link_libraries(${NAME}_test GTest::gtest_main) 
+    add_executable(${NAME}_test ${RT_LIB_TEST_SOURCES} ${RT_LIB_SOURCES})
+    target_link_libraries(${NAME}_test GTest::gtest_main gmock) 
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
-
-    # gtest_discover_tests(${NAME}_test)
   endif()
 endmacro()  
 
