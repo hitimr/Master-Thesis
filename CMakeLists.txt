@@ -23,6 +23,7 @@ include(tools/macros.cmake)
 
 # Options
 option(USE_PCH "Use precompiled headers" ON)
+option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
 
 
 # Definitions
@@ -34,21 +35,21 @@ set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_
 # Compile Flags
 set(CMAKE_CXX_FLAGS "-O3 -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall")
-set(CMAKE_CUDA_FLAGS "-O3 -g")
+set(CMAKE_CUDA_FLAGS "-O3")
 set(CMAKE_CUDA_FLAGS_DEBUG "-O0 -g")
 
 # Versions, Standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD 11)
+set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(MINIMUM_BOOST_VERSION 1.63.0)
 
 
 enable_language(CUDA)
 
-project(raytracing LANGUAGES CXX CUDA)
+project(raytracing LANGUAGES C CXX CUDA)
 
 # Subfolders
 add_subdirectory(external)
-add_subdirectory(src)
+add_subdirectory(src) # TODO: make switch
