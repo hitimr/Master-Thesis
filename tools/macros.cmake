@@ -60,3 +60,45 @@ macro(build_subproject)
 endmacro()
 
 
+macro(rt_lib)
+  # Parse Args
+  set(oneValueArgs NAME)
+  set(multiValueArgs SOURCES HEADERS DEPENDENCIES)
+  cmake_parse_arguments(RT_LIB "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+  set(NAME ${RT_LIB_NAME})
+  set(LIB_NAME lib${RT_LIB_NAME})
+  set(TARGET ${LIB_NAME})
+
+
+  add_library(${LIB_NAME} ${RT_LIB_SOURCES} ${RT_LIB_HEADERS})
+  set_property(TARGET ${TARGET} PROPERTY OUTPUT_NAME ${NAME})
+  add_library(rt::${NAME} ALIAS ${LIB_NAME})
+  target_include_directories(${TARGET} 
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
+
+endmacro()  
+
+macro(rt_exe)
+  # Parse args
+  set(oneValueArgs NAME)
+  set(multiValueArgs SOURCES HEADERS DEPENDENCIES)
+  cmake_parse_arguments(RT_EXE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+  set(TARGET ${RT_EXE_NAME})
+  set(NAME ${RT_EXE_NAME})
+
+  # Add executable and link libraries
+  add_executable(${TARGET} ${RT_EXE_SOURCES} ${RT_EXE_HEADERS})
+  target_include_directories(${TARGET} 
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${TARGET} PRIVATE ${RT_EXE_DEPENDENCIES})
+
+  # Command for invoking the program
+  add_custom_target(
+    run_${NAME}
+    COMMAND ./${NAME}
+    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+  )
+endmacro()
+
+

@@ -1,10 +1,10 @@
-#include <util/logging.hpp>
+#include "logging/logging.hpp"
 
 #include <nanovdb/util/CudaDeviceBuffer.h>
-// #include <nanovdb/util/IO.h>
 #include <nanovdb/util/Primitives.h>
 
 #include <iostream>
+#include <vector>
 
 #ifdef NANOVDB_USE_CUDA
 using BufferT = nanovdb::CudaDeviceBuffer;
@@ -12,19 +12,27 @@ using BufferT = nanovdb::CudaDeviceBuffer;
 using BufferT = nanovdb::HostBuffer;
 #endif
 
+#define ORIGIN (0., 0., 0.)
+
+#define SPHERE_RADIUS 10
+#define SPHERE_CENTER (30., 0., 0.)
+#define VOXEL_SIZE 0.1
+#define HALFWIDTH 3 * VOXEL_SIZE
+
+#define RAY_COUNT 1000
+#define RAY_START_Z -5.
+#define RAY_END_Z -5.
+
 int main()
 {
-  logging::init();
+  // logging::init();
 
+  // Generate Sphere
   nanovdb::GridHandle<BufferT> handle;
-  handle = nanovdb::createLevelSetSphere<float, float, BufferT>(100.0f, nanovdb::Vec3f(-20, 0, 0), 1.0, 3.0,
-                                                                nanovdb::Vec3d(0), "sphere");
+  handle = nanovdb::createLevelSetSphere<float, float, BufferT>(SPHERE_RADIUS, nanovdb::Vec3f(SPHERE_RADIUS),
+                                                                VOXEL_SIZE, HALFWIDTH);
 
-#ifdef NANOVDB_USE_CUDA
-  std::cout << "using NanoVDB" << std::endl;
-#else
-  std::cout << "Not using CUDA" << std::endl;
-#endif
+  // Generate Rays
 
   return 0;
 }
