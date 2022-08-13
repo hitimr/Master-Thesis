@@ -63,7 +63,7 @@ endmacro()
 macro(rt_lib)
   # Parse Args
   set(oneValueArgs NAME)
-  set(multiValueArgs SOURCES HEADERS DEPENDENCIES TEST_SOURCES)
+  set(multiValueArgs SOURCES HEADERS DEPENDENCIES TEST_SOURCES PRECOMPILED_HEADERS)
   cmake_parse_arguments(RT_LIB "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   # Set Variables

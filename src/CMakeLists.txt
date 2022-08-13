@@ -4,6 +4,8 @@ project(raytracing LANGUAGES C CXX CUDA)
 # Packages
 find_package(TBB REQUIRED)
 find_package(OpenVDB REQUIRED)
+find_package(plog REQUIRED)
+
 
 if(BUILD_TESTS)
   find_package(GTest REQUIRED)
