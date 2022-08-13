@@ -1,12 +1,5 @@
 #include "logging.hpp"
 
-#include <plog/Appenders/ColorConsoleAppender.h>
-#include <plog/Appenders/RollingFileAppender.h>
-#include <plog/Formatters/CsvFormatter.h>
-#include <plog/Formatters/TxtFormatter.h>
-#include <plog/Init.h>
-#include <plog/Log.h>
-
 void logging::init()
 {
   static plog::ColorConsoleAppender<plog::TxtFormatterUtcTime> consoleAppender; // TxtFormatter in UTC
