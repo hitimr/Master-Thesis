@@ -30,6 +30,7 @@ option(BUILD_TESTS "Build unit tests" ON)
 # Definitions
 ProcessorCount(PROCESSOR_COUNT)
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
+set(PROJECT_EXTERNAL_DIR ${PROJECT_ROOT_DIR}/external)
 set(NUM_BUILD_JOBS ${PROCESSOR_COUNT} CACHE STRING "Number of build jobs '-j <n>'")
 set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_BUILD_JOBS})
 

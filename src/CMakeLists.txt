@@ -23,7 +23,7 @@ rt_lib(
   NAME logging
   HEADERS logging/logging.hpp
   SOURCES logging/logging.cpp
-  DEPENDENCIES plog
+  DEPENDENCIES plog::plog
 )
 
 rt_lib(

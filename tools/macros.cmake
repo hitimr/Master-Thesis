@@ -48,6 +48,7 @@ macro(build_subproject)
     BUILD_ALWAYS OFF
   )
 
+  # Dependencies that must be installed before this component
   if(BUILD_SUBPROJECT_DEPENDS_ON)
     ExternalProject_Add_StepDependencies(${SUBPROJECT_NAME}
       build ${BUILD_SUBPROJECT_DEPENDS_ON}
@@ -56,7 +57,6 @@ macro(build_subproject)
 
   # Place installed component on CMAKE_PREFIX_PATH for downstream consumption
   list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/${SUBPROJECT_NAME})
-  # list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/${SUBPROJECT_NAME}/include)
 endmacro()
 
 
@@ -77,7 +77,12 @@ macro(rt_lib)
   add_library(rt::${NAME} ALIAS ${LIB_NAME})
   target_include_directories(${LIB_NAME} 
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
+
+  # Link Dependencies
+  if(RT_LIB_DEPENDENCIES)
+    find_package(${RT_LIB_DEPENDENCIES})
+    target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
+  endif()
 
   # Tests
   if(RT_LIB_TEST_SOURCES AND BUILD_TESTS)
