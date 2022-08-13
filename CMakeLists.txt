@@ -24,7 +24,11 @@ include(tools/macros.cmake)
 # Options
 option(USE_PCH "Use precompiled headers" ON)
 option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
+
 option(BUILD_TESTS "Build unit tests" ON)
+option(BUILD_DEPENDENCIES "Build all dependencies" ON)
+option(BUILD_DEPENDENCIY_OPENVDB "Build OpenVDB." ON)
+option(BUILD_RT_PROJECT "Build the main project" OFF)
 
 
 # Definitions
@@ -53,5 +57,10 @@ enable_language(CUDA)
 project(raytracing LANGUAGES C CXX CUDA)
 
 # Subfolders
-add_subdirectory(external)
-add_subdirectory(src) # TODO: make switch
+if(BUILD_DEPENDENCIES)
+  add_subdirectory(external)
+endif()
+
+if(BUILD_RT_PROJECT)
+  add_subdirectory(src)
+endif()
