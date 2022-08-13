@@ -33,14 +33,13 @@ int main()
   logging::init();
 
   // Generate Sphere
-  // TODO: fix logging
   PLOG_INFO << "Generating Sphere" << std::endl;
   nanovdb::GridHandle<BufferT> grid_handle;
   grid_handle = nanovdb::createLevelSetSphere<float, float, BufferT>(SPHERE_RADIUS, nanovdb::Vec3f(SPHERE_RADIUS),
                                                                      VOXEL_SIZE, HALFWIDTH);
 
   // Generate Rays
-  // PLOG_INOF << "Generating Rays" << std::endl;
+  PLOG_INFO << "Generating Rays" << std::endl;
   auto origins_z = math::linspace(RAY_START_Z, RAY_END_Z, RAY_COUNT);
   std::vector<nanovdb::Ray<float>> rays(RAY_COUNT);
 

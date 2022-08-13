@@ -78,6 +78,9 @@ macro(rt_lib)
   target_include_directories(${LIB_NAME} 
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
 
+  # PCH
+  target_precompile_headers(${TARGET} PUBLIC ${RT_LIB_HEADERS})
+
   # Link Dependencies
   if(RT_LIB_DEPENDENCIES)
     target_link_libraries(${TARGET} PUBLIC ${RT_LIB_DEPENDENCIES})
@@ -105,6 +108,9 @@ macro(rt_exe)
   target_include_directories(${TARGET} 
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${TARGET} PRIVATE ${RT_EXE_DEPENDENCIES})
+
+  # PCH
+  target_precompile_headers(${TARGET} PUBLIC ${RT_EXE_HEADERS})
 
   # Command for invoking the program
   add_custom_target(
