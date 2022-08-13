@@ -1,8 +1,18 @@
-mkdir ../build
+mkdir -p ../build
+cd ../build
 
 cmake \
-    -D CMAKE_BUILDTYPE=Debug \
-    -D NUM_BUILD_JOBS=2 \
-    -D BUILD_RT_PROJECT=OFF \
-    ../build
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DNUM_BUILD_JOBS=2 \
+    -DBUILD_RT_PROJECT=OFF \
+    ..
 
+make
+
+cmake \
+    -DBUILD_DEPENDENCIES=OFF \
+    -DBUILD_RT_PROJECT=ON \
+    -DCMAKE_CUDA_ARCHITECTURES=52 \
+    ..
+
+make

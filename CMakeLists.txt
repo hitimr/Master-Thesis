@@ -27,7 +27,7 @@ option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
 
 option(BUILD_TESTS "Build unit tests" ON)
 option(BUILD_DEPENDENCIES "Build all dependencies" ON)
-option(BUILD_DEPENDENCIY_OPENVDB "Build OpenVDB." ON)
+option(BUILD_DEPENDENCY_OPENVDB "Build OpenVDB." ON)
 option(BUILD_RT_PROJECT "Build the main project" OFF)
 
 
@@ -57,9 +57,7 @@ enable_language(CUDA)
 project(raytracing LANGUAGES C CXX CUDA)
 
 # Subfolders
-if(BUILD_DEPENDENCIES)
-  add_subdirectory(external)
-endif()
+add_subdirectory(external)
 
 if(BUILD_RT_PROJECT)
   add_subdirectory(src)

@@ -80,7 +80,7 @@ macro(rt_lib)
 
   # Link Dependencies
   if(RT_LIB_DEPENDENCIES)
-    target_link_libraries(${TARGET} PRIVATE ${RT_LIB_DEPENDENCIES})
+    target_link_libraries(${TARGET} PUBLIC ${RT_LIB_DEPENDENCIES})
   endif()
 
   # Tests
