@@ -40,9 +40,10 @@ macro(build_subproject)
     CMAKE_ARGS
       -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+      -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${SUBPROJECT_NAME}
-      -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
+      -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}      
       ${BUILD_SUBPROJECT_BUILD_ARGS}
     BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
     BUILD_ALWAYS OFF
@@ -93,6 +94,7 @@ macro(rt_lib)
     target_link_libraries(${NAME}_test GTest::gtest_main gmock) 
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
   endif()
+
 endmacro()  
 
 macro(rt_exe)
@@ -105,9 +107,13 @@ macro(rt_exe)
 
   # Add executable and link libraries
   add_executable(${TARGET} ${RT_EXE_SOURCES} ${RT_EXE_HEADERS})
-  target_include_directories(${TARGET} 
-    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${TARGET} PRIVATE ${RT_EXE_DEPENDENCIES})
+  target_include_directories(
+    ${TARGET} 
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}
+  )
+  target_link_libraries(${TARGET} PUBLIC ${RT_EXE_DEPENDENCIES})
+
+
 
   # PCH
   target_precompile_headers(${TARGET} PUBLIC ${RT_EXE_HEADERS})

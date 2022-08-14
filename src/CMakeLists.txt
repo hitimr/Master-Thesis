@@ -6,6 +6,9 @@ find_package(TBB REQUIRED)
 find_package(OpenVDB REQUIRED)
 find_package(plog REQUIRED)
 
+# Add current Dir to System Path so they can e included with <folder/module.hpp>
+include_directories(BEFORE SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
+
 
 if(BUILD_TESTS)
   find_package(GTest REQUIRED)
@@ -35,11 +38,5 @@ rt_lib(
   TEST_SOURCES math/math.test.cpp
 )
 
-# Executables
-rt_exe(
-  NAME precision
-  SOURCES precision.cu
-  DEPENDENCIES OpenVDB::openvdb rt::logging rt::math
-  )
-
 add_definitions(-DNANOVDB_USE_CUDA)
+add_subdirectory(experiments)
