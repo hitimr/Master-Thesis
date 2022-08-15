@@ -25,6 +25,11 @@ if(BUILD_DEPENDENCIES)
     URL "https://github.com/oneapi-src/oneTBB/archive/refs/tags/v2021.5.0.zip"
   )
 
+  build_subproject(
+    NAME DataFrame
+    URL "https://github.com/hosseinmoein/DataFrame/archive/refs/tags/1.21.0.tar.gz"
+  )
+
   if(BUILD_DEPENDENCY_OPENVDB)
     ExternalProject_Add(openvdb
       URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"

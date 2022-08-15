@@ -4,6 +4,16 @@
         "initializer_list": "cpp",
         "valarray": "cpp",
         "ostream": "cpp",
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "iosfwd": "cpp",
+        "*.tcc": "cpp",
+        "*.ipp": "cpp",
+        "bitset": "cpp",
+        "functional": "cpp",
+        "iostream": "cpp",
+        "limits": "cpp",
+        "streambuf": "cpp",
+        "variant": "cpp",
+        "algorithm": "cpp"
     }
 }

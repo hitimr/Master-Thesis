@@ -2,6 +2,8 @@
 #include <logging/logging.hpp>
 #include <math/math.hpp>
 
+#include <DataFrame/DataFrame.h>
+#include <DataFrame/DataFrameTypes.h>
 #include <nanovdb/NanoVDB.h>
 #include <nanovdb/util/GridHandle.h>
 #include <nanovdb/util/HDDA.h>
@@ -12,15 +14,21 @@
 #include <openvdb/openvdb.h>
 #include <openvdb/tools/LevelSetSphere.h>
 
+#include <algorithm>
+#include <fstream>
 #include <iostream>
+#include <numeric>
+#include <string>
 #include <vector>
 
 #define ORIGIN (0., 0., 0.)
 
-#define SPHERE_RADIUS 100.
-#define SPHERE_CENTER (30., 0., 0.)
-#define VOXEL_SIZE 1
-#define HALFWIDTH 3 * VOXEL_SIZE
+#define SPHERE_RADIUS 5.
+#define SPHERE_CENTER_X 10.
+#define SPHERE_CENTER_Y 0.
+#define SPHERE_CENTER_Z 0.
+#define VOXEL_SIZE 0.1
+#define HALFWIDTH 3
 
 #define RAY_COUNT 1000
 #define RAY_START_Z -5.
@@ -34,3 +42,4 @@ using OpenGridT = openvdb::FloatGrid;
 using NanoGridT = nanovdb::FloatGrid;
 using NanoCoordT = nanovdb::Coord;
 using NanoBufferT = nanovdb::HostBuffer;
+using ULDataFrame = hmdf::StdDataFrame<unsigned long>;

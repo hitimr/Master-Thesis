@@ -16,3 +16,4 @@ void math::test() { return; }
 
 // Forward declarations
 template std::vector<double> math::linspace(double, double, size_t);
+template std::vector<float> math::linspace(float, float, size_t);

@@ -5,6 +5,7 @@ project(raytracing LANGUAGES C CXX CUDA)
 find_package(TBB REQUIRED)
 find_package(OpenVDB REQUIRED)
 find_package(plog REQUIRED)
+find_package(DataFrame REQUIRED)
 
 # Add current Dir to System Path so they can e included with <folder/module.hpp>
 include_directories(BEFORE SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
