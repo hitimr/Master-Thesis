@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{article}
+%\usepackage{mathtools,comicsans}
+%\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[left=2.5cm,right=2cm, bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{import}
+%\usepackage{subfig}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{abstract}
+\usepackage{braket}
+\usepackage{float}
+\usepackage[toc,page]{appendix}
+%\usepackage{url}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{titling}
+
+\usepackage{tabularx}
+%\usepackage{subfigure}
+\usepackage{listings}
+\DeclareUnicodeCharacter{2212}{-}
+\graphicspath{ {./res/} } % Sets path to folder with images/figures
+
+\setlength {\marginparwidth }{2cm}
+\usepackage{todonotes}
+
+\usepackage{biblatex}
+\addbibresource{bibliography.bib}
+
+
+%\renewcaptionname\figureautorefname{Fig.}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\figurename}{Fig.}
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+%% Algorithm
+\usepackage{listings}
+\lstset{language=C++}
+\lstset{
+        mathescape=true,
+        morekeywords={if,then,else,return}
+        }
+\lstset{ 
+    captionpos=t,
+    tabsize=2
+}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+\renewcommand{\lstlistingname}{Algorithm}% Listing -> Algorithm
+\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+    numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
+    basicstyle=\footnotesize\ttfamily
+}
+
+\author{Santa Claus}
+\date{\today}
+\title{Performance analysis of GPU accelerated raytracing for narrow-band level sets using NanoVDB}
+
+
+% double underline
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+\begin{document}
+%%%%%%%%% TITLE PAGE %%%%%%%%%
+\maketitle
+
+
+
+%\listoftodos
+\begin{abstract}
+OpenVDB and NanoVDB are data structures which were initially developed for image and movie rendering.
+However it is possible to use the provided frameworks within the context of semiconductor process simulation.
+This paper aims to benchmark the raytracing performance of NanoVDB and OpenVDB for said application in a worst-cast scenario on a scientific computing cluster.
+NanoVDB, which is a mini-version of OpenVDB, is also compatible with common graphics APIs. Therefore the behavior on GPUs is examined as well.
+\end{abstract}
+
+
+\tableofcontents
+
+
+
+\newpage
+\setcounter{page}{1}
+
+
+%%%%%%%%% Begin Document %%%%%%%%%
+\include{1-introduction}
+\include{2-methology}
+\include{3-results}
+\include{4-discussion}
+%\include{2-conjugate-gradients}
+%\include{99-templateChapter}   
+\printbibliography
+
+\end{document}

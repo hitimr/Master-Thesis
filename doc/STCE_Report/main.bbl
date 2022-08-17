@@ -1,0 +1,246 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{nanovdb_nvidia}{online}{}
+      \name{author}{2}{}{%
+        {{hash=314562c1e549de645bb3d91ae46953d8}{%
+           family={Braithwaite},
+           familyi={B\bibinitperiod},
+           given={Wil},
+           giveni={W\bibinitperiod}}}%
+        {{hash=dec8ea0fa469cf29f780cde6df12a722}{%
+           family={Museth},
+           familyi={M\bibinitperiod},
+           given={Ken},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{8a03024f191788b1d55e8e45b047803e}
+      \strng{fullhash}{8a03024f191788b1d55e8e45b047803e}
+      \strng{bibnamehash}{8a03024f191788b1d55e8e45b047803e}
+      \strng{authorbibnamehash}{8a03024f191788b1d55e8e45b047803e}
+      \strng{authornamehash}{8a03024f191788b1d55e8e45b047803e}
+      \strng{authorfullhash}{8a03024f191788b1d55e8e45b047803e}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Accelerating OpenVDB on GPUs with NanoVDB}
+      \field{urlday}{19}
+      \field{urlmonth}{3}
+      \field{urlyear}{2022}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.nvidia.com/blog/accelerating-openvdb-on-gpus-with-nanovdb/
+      \endverb
+      \verb{url}
+      \verb https://developer.nvidia.com/blog/accelerating-openvdb-on-gpus-with-nanovdb/
+      \endverb
+    \endentry
+    \entry{manstetten2018efficient}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=5076b2ab73fbb9b3a3585c54714d8f08}{%
+           family={Manstetten},
+           familyi={M\bibinitperiod},
+           given={Paul\bibnamedelima Ludwig},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Wien}%
+      }
+      \strng{namehash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \strng{fullhash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \strng{bibnamehash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \strng{authorbibnamehash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \strng{authornamehash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \strng{authorfullhash}{5076b2ab73fbb9b3a3585c54714d8f08}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Efficient flux calculations for topography simulation}
+      \field{type}{phdthesis}
+      \field{year}{2018}
+    \endentry
+    \entry{nanovdb}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=dec8ea0fa469cf29f780cde6df12a722}{%
+           family={Museth},
+           familyi={M\bibinitperiod},
+           given={Ken},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Virtual Event, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{dec8ea0fa469cf29f780cde6df12a722}
+      \strng{fullhash}{dec8ea0fa469cf29f780cde6df12a722}
+      \strng{bibnamehash}{dec8ea0fa469cf29f780cde6df12a722}
+      \strng{authorbibnamehash}{dec8ea0fa469cf29f780cde6df12a722}
+      \strng{authornamehash}{dec8ea0fa469cf29f780cde6df12a722}
+      \strng{authorfullhash}{dec8ea0fa469cf29f780cde6df12a722}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce a sparse volumetric data structure, dubbed NanoVDB, which is portable to both C++11 and C99 as well as most graphics APIs, e.g.&nbsp;CUDA, OpenCL, OpenGL, WebGL, DirectX 12, OptiX, HLSL, and GLSL. As indicated by its name, NanoVDB is a mini-version of the much bigger OpenVDB library, both in terms of functionality and scope. However, NanoVDB offers one major advantage over OpenVDB, namely support for GPUs. As such it is applicable to both CPU and GPU accelerated simulation and rendering of high-resolution sparse volumes. In fact, it has already been adopted for real-time applications by several commercial renders and digital content creation tools, e.g. Autodesk’s Arnold, Blender, SideFX’s Houdini, and NVIDIA’s Omniverse just to mention a few.}
+      \field{booktitle}{ACM SIGGRAPH 2021 Talks}
+      \field{isbn}{9781450383738}
+      \field{series}{SIGGRAPH '21}
+      \field{title}{NanoVDB: A GPU-Friendly and Portable VDB Data Structure For Real-Time Rendering And Simulation}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1145/3450623.3464653
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3450623.3464653
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3450623.3464653
+      \endverb
+      \keyw{gpu data structures,simulation,Sparse volumes,rendering}
+    \endentry
+    \entry{openvdb}{inproceedings}{}
+      \name{author}{9}{}{%
+        {{hash=dec8ea0fa469cf29f780cde6df12a722}{%
+           family={Museth},
+           familyi={M\bibinitperiod},
+           given={Ken},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b7025eccc85cd15a40030e0d6c168621}{%
+           family={Lait},
+           familyi={L\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d96809942fbc6a1639fa74eb6b1f9847}{%
+           family={Johanson},
+           familyi={J\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d5c9089cff13a6a09e681403882f888b}{%
+           family={Budsberg},
+           familyi={B\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+        {{hash=041853805fcd58df913e0e885540bcf5}{%
+           family={Henderson},
+           familyi={H\bibinitperiod},
+           given={Ron},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6158b2894c27a8acca9f4f454b525a3c}{%
+           family={Alden},
+           familyi={A\bibinitperiod},
+           given={Mihai},
+           giveni={M\bibinitperiod}}}%
+        {{hash=df7da9ea8b331b9a8157ec8d67d9f150}{%
+           family={Cucka},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=adb5797edad2975fdfafaaa7afcc19b3}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2c8ad04ccd5f63355c836befc20ef50a}{%
+           family={Pearce},
+           familyi={P\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Anaheim, California}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6fb86154abb809cc2a630d406f9f1403}
+      \strng{fullhash}{8fca9e5553816b28d7e930c2a76395b9}
+      \strng{bibnamehash}{6fb86154abb809cc2a630d406f9f1403}
+      \strng{authorbibnamehash}{6fb86154abb809cc2a630d406f9f1403}
+      \strng{authornamehash}{6fb86154abb809cc2a630d406f9f1403}
+      \strng{authorfullhash}{8fca9e5553816b28d7e930c2a76395b9}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{OpenVDB has already been integrated into the next major release of the high-end 3D animation package Houdini, and there is anecdotal evidence that many of the major VFX and production houses are in the process of either evaluating or adopting VDB. This course presents a comprehensive overview of OpenVDB, an open-source C++ library comprising a novel hierarchical data structure and a suite of tools for efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids..}
+      \field{booktitle}{ACM SIGGRAPH 2013 Courses}
+      \field{isbn}{9781450323390}
+      \field{series}{SIGGRAPH '13}
+      \field{title}{OpenVDB: An Open-Source Data Structure and Toolkit for High-Resolution Volumes}
+      \field{year}{2013}
+      \verb{doi}
+      \verb 10.1145/2504435.2504454
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/2504435.2504454
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/2504435.2504454
+      \endverb
+    \endentry
+    \entry{sanzharov2020survey}{article}{}
+      \name{author}{3}{}{%
+        {{hash=765eb279c7b89a3a77e84f754f12c4d3}{%
+           family={Sanzharov},
+           familyi={S\bibinitperiod},
+           given={VV},
+           giveni={V\bibinitperiod}}}%
+        {{hash=42ade63cc8550cb90225bbef48403a2c}{%
+           family={Frolov},
+           familyi={F\bibinitperiod},
+           given={Vladimir\bibnamedelima A},
+           giveni={V\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=fd184c2b150151031004624acc9ba6a5}{%
+           family={Galaktionov},
+           familyi={G\bibinitperiod},
+           given={Vladimir\bibnamedelima A},
+           giveni={V\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \strng{fullhash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \strng{bibnamehash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \strng{authorbibnamehash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \strng{authornamehash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \strng{authorfullhash}{4ab4d1e701e8d0cf3c8f9c154eb831ac}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Programming and Computer Software}
+      \field{number}{4}
+      \field{title}{Survey of nvidia rtx technology}
+      \field{volume}{46}
+      \field{year}{2020}
+      \field{pages}{297\bibrangedash 304}
+      \range{pages}{8}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

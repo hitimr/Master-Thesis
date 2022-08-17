@@ -1,8 +1,4 @@
-# Original CMakeLists.txt file by:
-## Copyright 2020 Jefferson Amstutz
-## SPDX-License-Identifier: Unlicense
-
-cmake_minimum_required(VERSION 3.16)
+Cmake_minimum_required(VERSION 3.16)
 
 
 if(NOT CMAKE_INSTALL_PREFIX)
@@ -20,6 +16,7 @@ include(CheckLanguage)
 
 # Custom CMake Stuff
 include(tools/macros.cmake)
+include(tools/UseLATEX.cmake)
 
 # Options
 option(USE_PCH "Use precompiled headers" ON)
@@ -58,6 +55,7 @@ project(raytracing LANGUAGES C CXX CUDA)
 
 # Subfolders
 add_subdirectory(external)
+add_subdirectory(doc)
 
 if(BUILD_RT_PROJECT)
   add_subdirectory(src)

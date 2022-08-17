@@ -21,18 +21,16 @@
 #include <string>
 #include <vector>
 
-#define ORIGIN (0., 0., 0.)
-
-#define SPHERE_RADIUS 5.
-#define SPHERE_CENTER_X 10.
+#define SPHERE_RADIUS 50.
+#define SPHERE_CENTER_X 100.
 #define SPHERE_CENTER_Y 0.
 #define SPHERE_CENTER_Z 0.
-#define VOXEL_SIZE 0.1
+#define VOXEL_SIZE 1
 #define HALFWIDTH 3
 
 #define RAY_COUNT 1000
-#define RAY_START_Z -5.
-#define RAY_END_Z 5.
+#define RAY_START_Z -50.
+#define RAY_END_Z 50.
 
 using OpenRayT = openvdb::math::Ray<float>;
 using NanoRayT = nanovdb::Ray<float>;

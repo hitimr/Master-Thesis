@@ -1,14 +1,21 @@
 #include "precision.hpp"
 
+NanoVec3T indexToWorld(NanoCoordT &index, nanovdb::GridHandle<NanoBufferT> grid_handle)
+{
+  auto grid = grid_handle.grid<float>();
+  return NanoVec3T(index[0] * grid->voxelSize()[0], index[1] * grid->voxelSize()[1], index[2] * grid->voxelSize()[2]);
+}
+
 int main()
 {
   logging::init();
 
   // Generate Sphere
   PLOG_INFO << "Generating Sphere";
-  OpenGridT sphere =
-      *openvdb::tools::createLevelSetSphere<OpenGridT>(SPHERE_RADIUS, OpenVec3T(0, 0, 0), VOXEL_SIZE, HALFWIDTH);
+  OpenGridT sphere = *openvdb::tools::createLevelSetSphere<OpenGridT>(
+      SPHERE_RADIUS, OpenVec3T(SPHERE_CENTER_X, SPHERE_CENTER_Y, SPHERE_CENTER_Z), VOXEL_SIZE, HALFWIDTH);
   nanovdb::GridHandle<NanoBufferT> nano_sphere = nanovdb::openToNanoVDB<NanoBufferT>(sphere);
+  auto grid = nano_sphere.grid<float>();
 
   // Generate Rays
   PLOG_INFO << "Generating Rays";
@@ -51,9 +58,10 @@ int main()
     idx_y[i] = (float)coords[i].y();
 
     // Transform intersection point back to world space
-    auto wIntersect = nano_sphere.grid<float>()->indexToWorld(coords[i]);
-    intersect_x[i] = wIntersect.x();
-    intersect_y[i] = wIntersect.y();
+    // NanoVec3T wIntersect = indexToWorld(coords[i], nano_sphere);
+    auto wIntersect = grid->indexToWorld(coords[i].asVec3s());
+    intersect_x[i] = wIntersect[0];
+    intersect_y[i] = wIntersect[2];
   }
 
   // write Data To File
