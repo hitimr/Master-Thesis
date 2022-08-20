@@ -1,2 +1,13 @@
 # Directories
 build/
+
+# Latex
+*.aux
+*.bcf
+*.blg
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz*
+*.toc
+*.out
