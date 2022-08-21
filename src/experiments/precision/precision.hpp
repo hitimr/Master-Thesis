@@ -25,8 +25,8 @@
 #define SPHERE_CENTER_X 100.
 #define SPHERE_CENTER_Y 0.
 #define SPHERE_CENTER_Z 0.
-#define VOXEL_SIZE 1
-#define HALFWIDTH 3
+#define VOXEL_SIZE 5
+#define HALFWIDTH 25
 
 #define RAY_COUNT 1000
 #define RAY_START_Z -50.

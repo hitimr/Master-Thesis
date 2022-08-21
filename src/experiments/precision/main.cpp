@@ -19,13 +19,17 @@ int main()
 
   // Generate Rays
   PLOG_INFO << "Generating Rays";
-  auto origins_z = math::linspace<float>(RAY_START_Z, RAY_END_Z, RAY_COUNT);
+  std::vector<float> origins_z = math::linspace<float>(RAY_START_Z, RAY_END_Z, RAY_COUNT);
   std::vector<NanoRayT> iRays(RAY_COUNT);
+  std::vector<NanoRayT> wRays(RAY_COUNT);
 
   for (int i = 0; i < RAY_COUNT; i++)
   {
     NanoVec3T eye(0, 0, origins_z[i]);
     NanoVec3T direction(1, 0, 0);
+
+    NanoRayT wRay(eye, direction);
+    wRays[i] = wRay;
     NanoRayT ray(nano_sphere.grid<float>()->worldToIndex(eye), direction);
     iRays[i] = ray;
   }
@@ -53,7 +57,7 @@ int main()
   auto accessor = nano_sphere.grid<float>()->tree().getAccessor();
   for (int i = 0; i < RAY_COUNT; i++)
   {
-    nanovdb::ZeroCrossing(iRays[i], accessor, coords[i], values[i], times[i]);
+    nanovdb::ZeroCrossing(wRays[i], accessor, coords[i], values[i], times[i]);
     idx_x[i] = (float)coords[i].x();
     idx_y[i] = (float)coords[i].y();
 
@@ -89,5 +93,7 @@ int main()
     float>
     ("data.csv", hmdf::io_format::csv2);
   //clang-format on
+
+  PLOG_INFO << accessor.getValue({0,0,0});
   return 0;
 }

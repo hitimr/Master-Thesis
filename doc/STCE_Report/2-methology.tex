@@ -5,14 +5,8 @@
 The benchmark is designed to be baseline for future applications that are using NanoVDB for narrow-band level-sets and raytracing within the context of Semiconductor process simulation.
 Therefore no specific problem is chosen but the worst-case scenario in a typical application is modelled.
 
-
-Source code, build instructions and measurement data are available at \footnote{Pre-Release version. The project is not finished yet}:
-\\~\\
-\centerline{\url{https://github.com/hitimr/SelectedTopicsCompElectronics}}
-
-
 \subsection{Hardware setup}
-The benchmark is performed on a single node of a scientific cluster provided by TU Wien.
+The performance benchmark is performed on a single node of a scientific cluster provided by TU Wien.
 The node consists of the devices listed in Tab. \ref{tab:hardware} which are both used for the benchmark.
 
 CPUs and GPUs are different platforms in terms of architecture and design which makes a fair comparison with regards to their technical aspects difficult.
@@ -49,24 +43,22 @@ To simplify the program and enforce a worst-case scenario the following modifica
 \end{itemize}
 
 
-\begin{figure}[H]
-	\centering
-	% Rigth image
-	\begin{subfigure}{0.35\textwidth}
-		\includegraphics[width=1\linewidth]{res/trench_with_rays.png}
-		\caption{}
-		%\label{fig:trench_with_rays}
+\begin{figure}[!htb]
+	\minipage{0.32\textwidth}
+	  \includegraphics[width=\linewidth]{res/trench_with_rays.png}
+	\endminipage\hfill
+	\minipage{0.32\textwidth}
+	  \includegraphics[width=\linewidth]{res/benchmark_setup.png}
+	\endminipage\hfill
+	\minipage{0.32\textwidth}
+	  \includegraphics[width=\linewidth]{res/rays_on_sphere.png}
+	\endminipage
 
-	\end{subfigure}
-	% left image
-	\begin{subfigure}{0.35\textwidth}
-		\includegraphics[width=1\linewidth]{res/benchmark_setup.png}
-		\caption{}
-		%\label{fig:parallel-solution}
-	\end{subfigure}
-
-	\caption{Benchmark setup. \textbf{a} Trench being illuminated by a light source. Every ray has a chance of being reflected or absorbed.
-		\textbf{b} 2D cross-section of the modified setup. For the benchmark rays are distributed evenly across the surface of the inner sphere.}
+		\caption{Benchmark setup. 
+		\textbf{left} Trench being illuminated by a light source. Every ray has a chance of being reflected or absorbed.
+		\textbf{center} 2D cross-section of the modified setup. 
+		\textbf{right} Setup for determining accuracy of the calculation
+		}
 	\label{fig:benchmark_setup}
 \end{figure}
 
@@ -99,6 +91,8 @@ Results are considered correct if the following condition is satisfied for each 
 	\lVert \mathbf{r}_{calc} - \mathbf{r}_{gt} \lVert _2 \:  \leq \sqrt{3} \cdot VOXEL\_SIZE
 \end{equation}
 
-Additionally the 
-
+In its current implementation NanoVDB only provides limited support for floating point calculations and  many functions only accept integer-based arguments.
+Therefore NanoVDBs accuracy is investigated in an additional experiment using the setup shown in Fig. \ref{fig:benchmark_setup}c.
+Parallel rays are projected onto a sphere and the resulting intersection points are compared to an analytical solution. 
+The spacing between rays is set to be smaller than the voxel size. 
 
