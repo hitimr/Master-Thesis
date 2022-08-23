@@ -1,8 +1,7 @@
 \setcounter{section}{1}
 \section{Methodology}
 
-
-The benchmark is designed to be baseline for future applications that are using NanoVDB for narrow-band level-sets and raytracing within the context of Semiconductor process simulation.
+The benchmark is designed to be baseline for future applications that are using NanoVDB for narrow-band level-sets and raytracing within the context of semiconductor process simulation.
 Therefore no specific problem is chosen but the worst-case scenario in a typical application is modelled.
 
 \subsection{Hardware setup}
@@ -45,20 +44,20 @@ To simplify the program and enforce a worst-case scenario the following modifica
 
 \begin{figure}[!htb]
 	\minipage{0.32\textwidth}
-	  \includegraphics[width=\linewidth]{res/trench_with_rays.png}
+	\includegraphics[width=\linewidth]{res/trench_with_rays.png}
 	\endminipage\hfill
 	\minipage{0.32\textwidth}
-	  \includegraphics[width=\linewidth]{res/benchmark_setup.png}
+	\includegraphics[width=\linewidth]{res/benchmark_setup.png}
 	\endminipage\hfill
 	\minipage{0.32\textwidth}
-	  \includegraphics[width=\linewidth]{res/rays_on_sphere.png}
+	\includegraphics[width=\linewidth]{res/rays_on_sphere.png}
 	\endminipage
 
-		\caption{Benchmark setup. 
+	\caption{Benchmark setup.
 		\textbf{left} Trench being illuminated by a light source. Every ray has a chance of being reflected or absorbed.
-		\textbf{center} 2D cross-section of the modified setup. 
+		\textbf{center} 2D cross-section of the modified setup.
 		\textbf{right} Setup for determining accuracy of the calculation
-		}
+	}
 	\label{fig:benchmark_setup}
 \end{figure}
 
@@ -71,8 +70,9 @@ Origin and direction of every ray along with a ground truth are precomputed and 
 	\item NanoVDB (GPU)
 \end{itemize}
 
-The OpenVDB kernel servers as a baseline for comparison.
+The OpenVDB kernel serves as a baseline for comparison.
 Both NanoVDB kernels are identical but launched on different platforms.
+CPU based benchmarks are performed using all 40 threads.
 
 Only the time required to calculate intersections is measured. Memory management, data transfer, ray generation, result verification, etc. is not included.
 After the benchmark is complete the number of calculated rays per second is derived using
@@ -81,10 +81,12 @@ After the benchmark is complete the number of calculated rays per second is deri
 	Rps = \frac{ray \: count}{time} = [\frac{1}{s}]
 \end{equation}
 
-The benchmark is repeated while increasing the number of rays until no further increases in $Rps$ is observed.
+The benchmark is repeated as the number of rays is increased until the measured performance starts to plateau.
+If the benchmark requires more rays than RAM or VRAM can store, then pregenerated rays are recycled.
+This has the same effect as increasing the memory of a device as the set of rays is big enough (100s of millions) such that no beneficial memory access patterns emerge.
 The asymptotic behaviour of the resulting performance curve is used to estimate a potential performance gain for switching to NanoVDB or GPUs.
 
-After each iteration the resulting intersections ($\mathbf{r}_{calc}$) are compared to a pre-computed ground truth ($\mathbf{r}_{gt}$) to assure the correctness of the results. 
+After each iteration the resulting intersections ($\mathbf{r}_{calc}$) are compared to a pre-computed ground truth ($\mathbf{r}_{gt}$) to assure the correctness of the results.
 Results are considered correct if the following condition is satisfied for each ray:
 
 \begin{equation}
@@ -93,6 +95,6 @@ Results are considered correct if the following condition is satisfied for each 
 
 In its current implementation NanoVDB only provides limited support for floating point calculations and  many functions only accept integer-based arguments.
 Therefore NanoVDBs accuracy is investigated in an additional experiment using the setup shown in Fig. \ref{fig:benchmark_setup}c.
-Parallel rays are projected onto a sphere and the resulting intersection points are compared to an analytical solution. 
-The spacing between rays is set to be smaller than the voxel size. 
+Parallel rays are projected onto a sphere and the resulting intersection points are compared to an analytical solution.
+The spacing between rays is set to be smaller than the voxel size.
 
