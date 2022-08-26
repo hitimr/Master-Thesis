@@ -21,7 +21,7 @@ macro(build_subproject)
   # See cmake_parse_arguments docs to see how args get parsed here:
   #    https://cmake.org/cmake/help/latest/command/cmake_parse_arguments.html
   set(oneValueArgs NAME URL)
-  set(multiValueArgs BUILD_ARGS DEPENDS_ON)
+  set(multiValueArgs DEPENDS_ON)
   cmake_parse_arguments(BUILD_SUBPROJECT "" "${oneValueArgs}"
                         "${multiValueArgs}" ${ARGN})
 
@@ -44,7 +44,9 @@ macro(build_subproject)
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/${SUBPROJECT_NAME}
       -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}      
-      ${BUILD_SUBPROJECT_BUILD_ARGS}
+      -DCMAKE_CXX_FLAGS="-O2"
+      -DCMAKE_CXX_FLAGS_DEBUG="-O0"
+
     BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
     BUILD_ALWAYS OFF
   )
