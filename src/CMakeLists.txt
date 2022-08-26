@@ -39,5 +39,5 @@ rt_lib(
   TEST_SOURCES math/math.test.cpp
 )
 
-add_definitions(-DNANOVDB_USE_CUDA)
+# add_definitions(-DNANOVDB_USE_CUDA)
 add_subdirectory(experiments)

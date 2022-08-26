@@ -89,6 +89,7 @@ macro(rt_lib)
 
   # Tests
   if(RT_LIB_TEST_SOURCES AND BUILD_TESTS)
+    print(BUILD_TESTS)
     set(TEST_NAME ${NAME}_test)
     add_executable(${NAME}_test ${RT_LIB_TEST_SOURCES} ${RT_LIB_SOURCES})
     target_link_libraries(${NAME}_test GTest::gtest_main gmock) 

@@ -20,6 +20,7 @@ include(tools/UseLATEX.cmake)
 
 # Options
 option(USE_PCH "Use precompiled headers" ON)
+option(DISABLE_CUDA "Enable CUDA Components. Can be turned off to work on devices without a GPU" OFF)
 option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
 
 option(BUILD_TESTS "Build unit tests" ON)
@@ -38,20 +39,26 @@ set(DEFAULT_BUILD_COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE} -j ${NUM_
 # Compile Flags
 set(CMAKE_CXX_FLAGS "-O3 -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall")
-set(CMAKE_CUDA_FLAGS "-O3")
-set(CMAKE_CUDA_FLAGS_DEBUG "-O0 -g")
 
 # Versions, Standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD 17)
-set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+
 set(MINIMUM_BOOST_VERSION 1.63.0)
 
+# CUDA specific stuff
+if(DSIABLE_CUDA)
+  set(CUDA_LANG "")
+else()
+  set(CUDA_LANG "CUDA")
+  enable_language(CUDA)
+  set(CMAKE_CUDA_STANDARD 17)
+  set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+  set(CMAKE_CUDA_FLAGS "-O3")
+  set(CMAKE_CUDA_FLAGS_DEBUG "-O0 -g")
+endif()
 
-enable_language(CUDA)
-
-project(raytracing LANGUAGES C CXX CUDA)
+project(raytracing LANGUAGES C CXX ${CUDA_LANG})
 
 # Subfolders
 add_subdirectory(external)
