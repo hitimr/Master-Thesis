@@ -1,13 +1,15 @@
 \section{Discussion and Outlook}
 \subsection{Performance}
 As shown in Fig. \ref{fig:results} NanoVDB does provide better performance compared to OpenVDB on both platforms.
+However this is most likely due to the fact that OpenVDB performs additional steps to increase it's accuracy as mentioned in section \ref{chap:limitations}.
+
 Only for small problem sizes the CPU delivers better results.
 Once the benchmark surpasses $10^5 - 10^6$ rays the GPU overtakes the CPU.
-This behaviour is very common for GPU benchmarks becuase CPUs usually have significantly higher single core performance and lower latencies.
-Below a certain threshold the GPU is oftenn not even able to utilize it's full performance as more threads than rays are available.
+This behaviour is very common for GPU benchmarks because CPUs usually have significantly higher single core performance and lower latencies.
+Below a certain threshold the GPU is often not even able to utilize it's full performance as more threads than rays are available.
 However within the context of semiconductor process simulation the only the high-end spectrum is relevant.
 
-While NVIDIA promises an increase of performance of approx. 60x (see Tab. \ref{tab:nvidia_benchmark}), this benchmark is one order of magnitute slower.
+While NVIDIA promises an increase of performance of approx. 60x (see Tab. \ref{tab:nvidia_benchmark}), this benchmark is one order of magnitude slower.
 This is likely due to NVIDIA trying to sell best-case scenarios while this benchmark is aimed to be a worst-case scenario.
 Real world applications are most likely achieve performances between those values.
 
@@ -36,38 +38,17 @@ This number also increases if more than one GPU is used.
 Therefore ray generation should be performed on GPU as well.
 However this is not covered by this benchmark as this problem was not considered in the design phase of the experiment.
 
-\subsection{Performance improvements}
+\subsection{Potential performance improvements}
 Nvidia GPUs follow a SIMT \footnote{Single Instruction Multiple Thread} hardware architecture where threads are grouped in 'warps'.
 Each warp usually contains 32 synchronized threads which all execute the same instruction.
 In order to execute \texttt{if-else}-statements both branches have to be evaluated by a warp consecutively while a mask is used to disable the the false-path in each thread. \cite[Chapter~3.6.3]{mccool}
 Therefore every branch is potentially wasteful and should be avoided by using branchless patterns.
 
 
-Alg. \ref{cod:ZeroCrossingCore} shows the core loop if NanoVDB's raytracing function which contains 2 \texttt{if}-branches.
+Alg. \ref{cod:nano_zero_crossing} shows the core loop if NanoVDB's raytracing function which contains 2 \texttt{if}-branches.
 Additional branches are present in various subroutines such as \texttt{RoundDown()} or \texttt{hdda.update()}.
 Furthermore two \texttt{while}-loops are present which in the context of warps behave just like branches.
 I.e.: Each warp must 'wait' until all 32 threads have finished the loop.
-
-\begin{lstlisting}[caption={core loop of NanoVDB's raytraciong function}]
-while (hdda.step()) {
-    ijk = RoundDown<Coord>(ray(hdda.time() + Delta));
-    hdda.update(ray, acc.getDim(ijk, ray));
-    if (hdda.dim() > 1 || !acc.isActive(ijk))
-        continue; // either a tile value or an inactive voxel
-    while (hdda.step() && acc.isActive(hdda.voxel())) { // in the narrow band
-        v = acc.getValue(hdda.voxel());
-        if (v * v0 < 0) { // zero crossing
-            ijk = hdda.voxel();
-            t = hdda.time();
-            return true;
-        }
-    }
-}
-\end{lstlisting}
-\label{cod:ZeroCrossingCore}
-
-
-
 The outer loop is used while the ray is outside the narrow band. Once the ray enters a narrow band the inner loop is active and the value of each voxel is evaluated to detect an intersection.
 Therefore as long as any ray of a warp remains within a narrow-band, the computation of all other rays is essentially halted.
 
@@ -88,33 +69,8 @@ Since 2018 NVIDIA is also selling GPUs with hardware accelerated raytracing capa
 Due to its proprietary license the exact functionality of this technology is not part of the public domain but the technology seems to be a hardware implementation of NVIDIA's OptiX pipeline.
 A recent analysis \cite{sanzharov2020survey} also shows that a performance increase of up to one order of magnitude is possible in certain raytracing scenarios.
 However additional research and testing is required to determine if NanoVDB is compatible with this technology.
-It should be noted that the GPU used for this benchmark also containst 40 RT cores.
-Therefore it should be possible to repeate this benchmark on the same platform.
-
-\subsection{Accuracy}
-As shown in Fig. \ref{fig:results_accuracy} NanoVDB is limited by the resolution of the grid when calculating ray intersections.
-The output parameters of \texttt{nanovdb::ZeroCrossing} for coordinates and time are hardcoded to \texttt{int} and \texttt{float} (see Alg. \ref{cod:ZeroCrossing}).
-
-Despite the \texttt{t} being returned as a floating point number the resolution is still limited by the voxel size and NanoVDB does not perform additional steps to improve the accuracy of the ray intersection.
-The result basically represents the number of voxels between the ray source and the intersection point.
-
-\subsection{Accuracy improvements}
-
-It should however be possible to increase the accuracy of Alg. \ref{cod:ZeroCrossingCore} with some modifications.
-For example the value of neighboring voxels can be used to approximate the intersection point within a voxel.
-This operation only needs to be performed once an intersection is found. Thus the performance impact should be minimal.
-
-\begin{lstlisting}[caption={Footprint of NanoVDB's raytracing function. Types for coordinates (ijk) and time (t) are hardcoded. The function returns false if no intersection has been detected}]
-    template<typename RayT, typename AccT>
-    inline __hostdev__ bool ZeroCrossing(
-        RayT& ray,  // IN: Ray used for intersection
-        AccT& acc,  // IN: Accessor object to the grid
-        Coord& ijk, // OUT: Intersection coordinates (int[3])
-        typename AccT::ValueType& v, // OUT: grid value at intersection
-        float& t    // OUT: Intersection time
-    )
-    \end{lstlisting}
-\label{cod:ZeroCrossing}
+It should be noted that the GPU used for this benchmark also contains 40 RT cores.
+Therefore it should be possible to repeat this benchmark on the same platform.
 
 
 

@@ -82,8 +82,12 @@
         "__nullptr": "cpp"
     },
     "cSpell.words": [
+        "basicstyle",
         "behaviour",
+        "CUDA",
         "hdda",
+        "hostdev",
+        "keywordstyle",
         "linspace",
         "matplotlib",
         "nanovdb",
@@ -91,7 +95,11 @@
         "Opti",
         "pyplot",
         "raytracing",
+        "SIMT",
+        "stringstyle",
         "voxel",
-        "voxels"
+        "voxels",
+        "VRAM",
+        "Xeon"
     ],
 }
