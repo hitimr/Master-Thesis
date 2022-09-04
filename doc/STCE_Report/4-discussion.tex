@@ -10,8 +10,7 @@ Below a certain threshold the GPU is often not even able to utilize it's full pe
 However within the context of semiconductor process simulation the only the high-end spectrum is relevant.
 
 While NVIDIA promises an increase of performance of approx. 60x (see Tab. \ref{tab:nvidia_benchmark}), this benchmark is one order of magnitude slower.
-This is likely due to NVIDIA trying to sell best-case scenarios while this benchmark is aimed to be a worst-case scenario.
-Real world applications are most likely achieve performances between those values.
+This is likely because NVIDIA's benchmark represent a CG\footnote{computer graphics} scenario while this benchmark aims to be a worst-case scenario for scientific applications.
 
 Since both frameworks use different data structures and algorithms, significant adaptations to the code base are required for a project to migrate to NanoVDB.
 The expected increase in performance for CPU based systems may be considered too small to justify the amount of necessary work.
@@ -29,7 +28,7 @@ However within the context of semiconductor process simulation the majority of t
 
 It should also be noted that a GPU's Video-RAM is usually much smaller than regular RAM.
 This not only limits the maximum grid size but also the number of rays that can be stored or buffered on GPU.
-NanoVDB's Ray-class has a memory-footprint of 56 bytes per ray.
+The rays in NanoVDB have a memory-footprint of 56 bytes per ray.
 The GPU used for this benchmark has 16GB of memory and can therefore theoretically hold up to 285 million rays (omitting grid, kernels, etc.).
 Using the measured performance of 117 MRps the computation of all rays would complete within 2.5s.
 In order to go beyond that limit new rays need to be generated during the simulation.

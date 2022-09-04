@@ -87,6 +87,7 @@
         "CUDA",
         "hdda",
         "hostdev",
+        "Intersector",
         "keywordstyle",
         "linspace",
         "matplotlib",

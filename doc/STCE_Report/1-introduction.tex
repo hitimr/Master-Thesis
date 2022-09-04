@@ -12,16 +12,16 @@ Therefore simulations usually resemble an approximation using a limited amount o
 However in general simulations usually benefit from an increase in computed elements (i.e. the more the better).
 
 An important part of every simulation is the choice of underlying data structure.
-One option is OpenVDB which can be used to efficiently store high resolution volumes and level sets. \cite{openvdb}
-OpenVDB was initially developed for the CGI and movie industry. Due to it's flexibility it is also possible to adapt it for use in semiconductor process simulation \cite{manstetten2018efficient}.
+One option is OpenVDB which can be used to efficiently store high resolution volumes and level-sets \cite{openvdb}.
+OpenVDB was initially developed for the animation and movie industry. Due to its flexibility it is also possible to adapt it for use in semiconductor process simulation \cite{manstetten2018efficient}.
 
-In a recent article  NVIDIA published a benchmark that promises a significant speed-up when using NanoVDV.
+In a recent article  NVIDIA published a benchmark that promises a significant speed-up when using NanoVDB.
 For process simulations the results for level-set raytracing are of significant importance.
 According to Tab. \ref{tab:nvidia_benchmark}, NanoVDB on a GPU should be 60x faster compared to a multithreaded implementation using OpenVDB. (Execution time of 2.427ms vs 148.182ms).
 
 
 \begin{table}[H]
-	\caption{Benchmark results published by NVIDIA. The benchmark setup and source code are undisclosed. \cite{nanovdb_nvidia}}
+	\caption{Benchmark results published by NVIDIA. The benchmark setup and source code are undisclosed \cite{nanovdb_nvidia}.}
 	\centering
 	\begin{tabular}{@{}lllll@{}}
 		\toprule
@@ -41,7 +41,7 @@ Therefore the goal of this paper is to verify these results using a benchmark th
 \subsection{Limitations of NanoVDB}
 \label{chap:limitations}
 
-NanoVDB is still in it's early development phase and therefore it is likely that not all features are implemented yet.
+NanoVDB is still in its early development phase and therefore it is likely that not all features are implemented yet.
 Therefore NanoVDB currently comes with several limitations when used for simulations:
 
 \begin{description}
