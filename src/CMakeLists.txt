@@ -6,9 +6,11 @@ find_package(TBB REQUIRED)
 find_package(OpenVDB REQUIRED)
 find_package(plog REQUIRED)
 find_package(DataFrame REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # Add current Dir to System Path so they can e included with <folder/module.hpp>
 include_directories(BEFORE SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 
 if(BUILD_TESTS)
