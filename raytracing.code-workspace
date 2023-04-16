@@ -10,5 +10,40 @@
 			"memory_resource": "cpp"
 		},
 		"prettier.printWidth": 120
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "(gdb) Launch",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/build/src/experiments/img_sim",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"setupCommands": [
+					{
+						"description": "Enable pretty-printing for gdb",
+						"text": "-enable-pretty-printing",
+						"ignoreFailures": true
+					},
+					{
+						"description": "Set Disassembly Flavor to Intel",
+						"text": "-gdb-set disassembly-flavor intel",
+						"ignoreFailures": true
+					}
+				]
+			},
+			{
+				"name": "CUDA C++: Launch",
+				"type": "cuda-gdb",
+				"request": "launch",
+				"program": "${workspaceFolder}/build/src/precision"
+			}
+		]
 	}
 }
