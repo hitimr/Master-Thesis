@@ -26,7 +26,8 @@ option(NANOVDB_USE_CUDA "Enable CUDA + GPU for NanoVDB" ON)
 option(BUILD_TESTS "Build unit tests" ON)
 option(BUILD_DEPENDENCIES "Build all dependencies" ON)
 option(BUILD_DEPENDENCY_OPENVDB "Build OpenVDB." ON)
-option(BUILD_RT_PROJECT "Build the main project" OFF)
+option(BUILD_RT_PROJECT "Build the main project" ON)
+option(CMAKE_BUILD_TYPE Debug)
 
 
 # Definitions

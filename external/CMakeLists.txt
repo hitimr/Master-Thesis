@@ -1,5 +1,3 @@
-# add_subdirectory(plog)
-
 if(BUILD_DEPENDENCIES)
   build_subproject(
     NAME plog
