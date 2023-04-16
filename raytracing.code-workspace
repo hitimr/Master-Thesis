@@ -6,8 +6,9 @@
 	],
 	"settings": {
 		"files.associations": {
-			"*.cu": "cpp"
+			"*.cu": "cpp",
+			"memory_resource": "cpp"
 		},
-	"prettier.printWidth": 120,
+		"prettier.printWidth": 120
 	}
 }
