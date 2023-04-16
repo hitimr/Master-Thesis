@@ -49,6 +49,7 @@ macro(build_subproject)
 
     BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
     BUILD_ALWAYS OFF
+    DOWNLOAD_EXTRACT_TIMESTAMP ON
   )
 
   # Dependencies that must be installed before this component

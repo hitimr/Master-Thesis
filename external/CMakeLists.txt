@@ -32,7 +32,7 @@ if(BUILD_DEPENDENCIES)
 
   if(BUILD_DEPENDENCY_OPENVDB)
     ExternalProject_Add(openvdb
-      URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"
+      URL "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v10.0.1.zip"
       DOWNLOAD_DIR openvdb/download
       PREFIX openvdb
       CMAKE_ARGS
@@ -62,6 +62,7 @@ if(BUILD_DEPENDENCIES)
         -D NANOVDB_BUILD_TOOLS=ON
       BUILD_ALWAYS OFF
       BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
+      DOWNLOAD_EXTRACT_TIMESTAMP ON
     )
 
     ExternalProject_Add_StepDependencies(openvdb build TBB zlib blosc)
